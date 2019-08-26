@@ -59,3 +59,14 @@ function nombreObjetoTres(persona){
 }
 nombreObjetoTres(alan)
 nombreObjetoTres(sue)
+
+/// PARAMETROS COM OREFERNCIA:
+var cumple = (persona) => {
+    var personaNueva=   {
+    ...persona,
+    edad:persona.edad += 1,
+    regaloIdeal: 'piano',
+    comida: ['chilaquiles','pastel']
+}
+console.log(`Hola!!! el es ${personaNueva.apodo.toUpperCase()} y su comida favorita es  ${personaNueva.comida[0]}`);
+}
