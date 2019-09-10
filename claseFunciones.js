@@ -25,7 +25,7 @@ var sue = {
 }
 var alan = {
     apodo: 'alanrex',
-    edad: 27,
+    edad: 37,
     hobby: 'dinos',
     instrumento: 'guitarra',
 }
@@ -70,3 +70,46 @@ var cumple = (persona) => {
 }
 console.log(`Hola!!! el es ${personaNueva.apodo.toUpperCase()} y su comida favorita es  ${personaNueva.comida[0]}`);
 }
+/// FUNCIONES QUE RETORNAN VALORES: 
+
+// En este caso estamos almacenando en una variable un valor que sera fijo, al ser asi se debe amacenar en una cosntante,
+// ya que son valores que no de  deben modificarse, es uan biuena practica guardarlos con nombres en MAYUSCULAS y separados
+// de guón bajo.
+
+const MAYORIA_DE_EDAD = 18;
+// aqui retornamos el valor de nuestra condicional.
+function mayorEdad(persona) {
+    return persona.edad >= MAYORIA_DE_EDAD;
+}
+function ImprimeSiesMayorDeEdad(persona){
+    if(mayorEdad(persona)) {
+        console.log(`tiene ${persona.edad}, es mayor de edad :)`);
+    }
+}
+ImprimeSiesMayorDeEdad(sue);
+
+// ARROW FUNCTION: 
+// es como una funcion anonima , osea una funcion asignada a una variable, como:
+// Eso mismo pero en una sola linea que puede remplazar o ser lo mismo que funcion de arriba:mayorEdad :
+//ARROW FUNCTION, Su sintaxis es asi, por lo regular se usa  de esta manera si tiene mucho codigo 
+// si el return es muy pequeño podemos = QUITAR  EL RETURN Y LAS LLAVES, ADEMÁS DE LOS PARENTESIS DEL PARAMETRO :O
+
+//opcion UNO , donde solo obvias parentesis de parametro:
+        //const validateAge = persona => { return persona.edad >= MAYORIA_DE_EDAD};
+
+//opcion DONDE , donde bvia parentesis de parametro Y SI SOLO UNA LINEA, voy a quitar  RETURN Y LAS LLAVES:
+        //const validateAge = persona => persona.edad >= MAYORIA_DE_EDAD;
+
+// opcion TRES, donde estoy destructurando el objeto del parametro, ojo aqui, debe ir en parentesis y llaves para indicar que esun objeto.
+const validateAge = ({ edad }) => edad >= MAYORIA_DE_EDAD;
+
+const printIfIsOlder = (persona) => {
+     // por lo regular aqui se pone RETURN pero como estamos usando console.log, choca.
+     if(validateAge(persona)){
+        console.log('es mayorcito este beib :D <3');
+     }
+}
+printIfIsOlder(alan);
+
+
+
