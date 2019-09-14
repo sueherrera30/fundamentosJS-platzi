@@ -84,8 +84,6 @@ function obtenerPersonaje (id){
         // con await la ejecución de nuestra función se detendrá hasta que todas las promesas esten resueltas.
         //pasa usar await debemos de marcarla como ASINCRONA con ASYNC antes de la funcion  
         // toda la parte asincrtona debe poner en un bloque llamada try, dentro de try, lo asincrono, y en catch el error.
-
-
     async function obtenerLosPersonajes(){
         var ids = [1,2,3,4,5,6,7,9,10,11,12];
         var promesas =  ids.map(id => obtenerPersonaje(id)) 
