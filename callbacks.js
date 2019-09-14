@@ -68,13 +68,37 @@ function obtenerPersonaje (id){
   }
 //ahora llamamos a la persona, pasandole el id que me interesa
 //al then le pasamos funcion con l oque queremos que haga el personaje 
+// aqui ya nos van a salir en orden la asincronia, mientras que console.log de arriba en linea 61 aun esta desordenado.
 
-// for(var i = 0; i < 10; i++){
-//     obtenerPersonaje(i);
-// }
-var ids = [1,2,3,4,5,6,7,9,10,11,12];
-var promesas = ids.map(id => obtenerPersonaje(id))
-Promise
-.all(promesas)
-.then((personajes) =>console.log(personajes))
-.catch(onerror)
+    // VERSION FUNCIONAL PERO SIN AWAIT:
+    // var ids = [1,2,3,4,5,6,7,9,10,11,12];
+    // var promesas = ids.map(id => obtenerPersonaje(id))
+    // Promise
+    // .all(promesas)
+    // .then((personajes) =>console.log(personajes))
+    // .catch(onerror)
+
+
+     //GUARDAMOS EN VARIABLE: cuando todas las promesas se resuelvan guardamelas acá
+
+        // con await la ejecución de nuestra función se detendrá hasta que todas las promesas esten resueltas.
+        //pasa usar await debemos de marcarla como ASINCRONA con ASYNC antes de la funcion  
+        // toda la parte asincrtona debe poner en un bloque llamada try, dentro de try, lo asincrono, y en catch el error.
+
+
+    async function obtenerLosPersonajes(){
+        var ids = [1,2,3,4,5,6,7,9,10,11,12];
+        var promesas =  ids.map(id => obtenerPersonaje(id)) 
+        try {
+            var personajes =  await Promise.all(promesas)
+            // esto es lo que queremos que haga el codigo:
+            console.log(personajes)
+        }
+        catch(id){
+            onError(id)
+        }
+    }
+    // llamado de funcion asincrona 
+    obtenerLosPersonajes()
+
+    //asinc away no lo soporta todos los nav.
