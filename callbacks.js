@@ -45,6 +45,7 @@ const onPeopleResponse = function (character) {
 // en constructor de promesa,se pasa una funcion con parametros de resolve y reject( se puede usar functio o arrow function)
 // dentro de funcion de promesa  realizar el llamado asincrono, la peticion
 
+
 function obtenerPersonaje (id){    
     return new Promise((resolve,reject) => {
         const url = `${API_URL}${PEOPLE_URL.replace(':id', id)}`
@@ -55,18 +56,25 @@ function obtenerPersonaje (id){
             //estafuncion resolve no se ejecutará hasta que la funcion aue la esta llamando se ejecute :O osea que el GET SEA EXITOSO.
         })
         // le pasamos fail por si se rechaza, pasandole funcion de parametro
-        .fail(() =>reject(id))       
+        .fail(() =>reject(id))
+        .then(function(personaje){
+            console.log(`hola yo soy ${personaje.name} y soy el personaje numero ${id}`)
+        }).catch(onError)       
     }) 
-    .then(function(personaje){
-        console.log(`hola yo soy ${personaje.name} y soy el personaje numero ${id}`)
-    }).catch(function(id) {
+
+    function onError (id) {
         console.log(`ocurrio un ERROR el personaje ${id}`)   
-      })
+      }
   }
 //ahora llamamos a la persona, pasandole el id que me interesa
 //al then le pasamos funcion con l oque queremos que haga el personaje 
-//obtenerPersonaje(1)
 
-for(var i = 0; i < 10; i++){
-    obtenerPersonaje(i);
-}
+// for(var i = 0; i < 10; i++){
+//     obtenerPersonaje(i);
+// }
+var ids = [1,2,3,4,5,6,7,9,10,11,12];
+var promesas = ids.map(id => obtenerPersonaje(id))
+Promise
+.all(promesas)
+.then((personajes) =>console.log(personajes))
+.catch(onerror)
