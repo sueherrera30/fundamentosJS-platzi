@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>xml http request </title>
+</head>
+<body>
+  <script>
+      const BASE_URL = 'http://pokeapi.co/api/v2/'
+      // va a recibir un objeto, destructurado.
+      function ajax({ method, url ,async }){
+          //todo viviera dentro de ajax, ahi invocaré a mi instancia.
+          const request = new XMLHttpRequest()
+          //parametros 1. metodo  - 2. url - 3. si va ser syncrono o asincrono 
+          // post cuando queremos llevar informacioón, ENVIAR.
+          // get obtener.
+          request.open(method,url,async)
+          request.send()
+      }
+      ajax({
+          method:'GET',
+          url:`${BASE_URL}pokemon/25`,
+          async: false,
+      })
+      
+  </script>  
+</body>
+</html>
+
+
+//ajax de  jquery es como fetch.
