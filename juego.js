@@ -5,7 +5,7 @@ const celeste = document.getElementById('celeste');
 const violeta = document.getElementById('violeta');
 const naranja = document.getElementById('naranja');
 const verde = document.getElementById('verde');
-const ULTIMO_NIVEL = 10;
+const ULTIMO_NIVEL = 5;
 
 // creamos prototipo:
 class Juego {
@@ -18,8 +18,9 @@ class Juego {
         //atamos this al juego y no al boton 
         this.elegirColor = this.elegirColor.bind(this)
         this.siguienteNivel = this.siguienteNivel.bind(this)
+        //toggle es como un switch, nos ayuda a intercambiar el agregar o quitar clases.
         // va a a agregarle clase de css ya existente, llamar como string.
-        btnEmpezar.classList.add('hide') 
+        this.toggleBtnEmpezar()
         this.nivel = 1
         // guardamos en objeto las variables, no necesitamos poner this.atributo, si es que se llaman igual
         this.colores = {
@@ -27,6 +28,13 @@ class Juego {
             violeta,
             naranja,
             verde
+        }
+    }
+    toggleBtnEmpezar(){
+        if(btnEmpezar.classList.contains('hide')){
+            btnEmpezar.classList.remove('hide') 
+        } else {
+            btnEmpezar.classList.add('hide') 
         }
     }
     generarSecuencia(){
@@ -107,15 +115,26 @@ class Juego {
             this.nivel++
             this.eliminarEventosClick()
             if(this.nivel === ULTIMO_NIVEL + 1){
-                // gano
+                this.ganoElJuego()
             }else {
                 //aqui no estamos invocando si no mas bien que solo le decimos cual es la función que debe llamar.
                 setTimeout(this.siguienteNivel, 1500)
             }
         }
        } else {
-           //perdio 
+        this.perdioElJuego()
        }
+    }
+    ganoElJuego(){
+        Swal.fire('Sue in platzi','yay! ganaste maifren','success')
+        .then(this.inicializar.bind(this))
+    }
+    perdioElJuego(){
+        Swal.fire('sue in platzi','upps, soly, perdiste','error')
+        .then(()=> {
+            this.eliminarEventosClick()
+            this.inicializar()
+        })
     }
 }
 function empezarJuego() {
